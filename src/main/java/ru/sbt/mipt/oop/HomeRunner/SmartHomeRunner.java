@@ -1,13 +1,17 @@
-package ru.sbt.mipt.oop;
+package ru.sbt.mipt.oop.HomeRunner;
+
+import ru.sbt.mipt.oop.EventResolver.EventResolver;
+import ru.sbt.mipt.oop.HomeSupervision.HomeSupervision;
+import ru.sbt.mipt.oop.SensorEvent;
 
 public class SmartHomeRunner implements HomeRunner {
 
     private final HomeSupervision homeSupervision;
-    private final EventHandler eventHandler;
+    private final EventResolver eventResolver;
 
-    public SmartHomeRunner(HomeSupervision homeSupervision, EventHandler eventHandler) {
+    public SmartHomeRunner(HomeSupervision homeSupervision, EventResolver eventResolver) {
         this.homeSupervision = homeSupervision;
-        this.eventHandler = eventHandler;
+        this.eventResolver = eventResolver;
     }
 
     @Override
@@ -16,7 +20,7 @@ public class SmartHomeRunner implements HomeRunner {
 
         while (event != null) {
             System.out.println("Got event: " + event);
-            eventHandler.handleEvent(event);
+            eventResolver.resolveEvent(event);
             event = homeSupervision.getNextSensorEvent();
         }
     }

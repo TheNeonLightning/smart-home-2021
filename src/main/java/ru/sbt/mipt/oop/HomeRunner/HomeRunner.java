@@ -1,4 +1,4 @@
-package ru.sbt.mipt.oop;
+package ru.sbt.mipt.oop.HomeRunner;
 
 
 // interface HomeRunner is used to separate logic of receiving and processing
