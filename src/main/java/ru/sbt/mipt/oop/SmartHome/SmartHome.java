@@ -1,10 +1,21 @@
-package ru.sbt.mipt.oop;
+package ru.sbt.mipt.oop.SmartHome;
+
+import ru.sbt.mipt.oop.Action;
+import ru.sbt.mipt.oop.Actionable;
 
 import java.util.ArrayList;
 import java.util.Collection;
 
-public class SmartHome {
+public class SmartHome implements Actionable {
     Collection<Room> rooms;
+
+    @Override
+    public void execute(Action action) {
+        for (Room room : rooms) {
+            room.execute(action);
+        }
+        action.applyAction(this);
+    }
 
     public SmartHome() {
         rooms = new ArrayList<>();

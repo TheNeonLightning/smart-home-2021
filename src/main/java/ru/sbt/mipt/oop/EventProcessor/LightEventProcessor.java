@@ -1,6 +1,7 @@
 package ru.sbt.mipt.oop.EventProcessor;
 
 import ru.sbt.mipt.oop.*;
+import ru.sbt.mipt.oop.SmartHome.*;
 
 
 public class LightEventProcessor implements EventProcessor {
@@ -20,14 +21,28 @@ public class LightEventProcessor implements EventProcessor {
     }
 
     private void handleLightOn(String lightId) {
-        Light light = SmartHomeUtility.findLight(smartHome, lightId);
-        light.setOn(true);
-        System.out.println("Light " + light.getId() + " was turned on.");
+        smartHome.execute((object) -> {
+            if (object instanceof Light) {
+                Light light = (Light) object;
+                if (light.getId().equals(lightId)) {
+                    light.setOn(true);
+                    System.out.println("Light " +
+                            light.getId() + " was turned on.");
+                }
+            }
+        });
     }
 
     private void handleLightOff(String lightId) {
-        Light light = SmartHomeUtility.findLight(smartHome, lightId);
-        light.setOn(false);
-        System.out.println("Light " + light.getId() + " was turned off.");
+        smartHome.execute((object) -> {
+            if (object instanceof Light) {
+                Light light = (Light) object;
+                if (light.getId().equals(lightId)) {
+                    light.setOn(false);
+                    System.out.println("Light " +
+                            light.getId() + " was turned off.");
+                }
+            }
+        });
     }
 }

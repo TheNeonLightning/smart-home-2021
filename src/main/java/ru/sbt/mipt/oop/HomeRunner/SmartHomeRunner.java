@@ -4,6 +4,7 @@ import ru.sbt.mipt.oop.EventResolver.EventResolver;
 import ru.sbt.mipt.oop.HomeSupervision.HomeSupervision;
 import ru.sbt.mipt.oop.SensorEvent;
 
+
 public class SmartHomeRunner implements HomeRunner {
 
     private final HomeSupervision homeSupervision;

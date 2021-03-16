@@ -22,9 +22,9 @@ public class HomeSupervisionSimulator implements HomeSupervision {
         String objectId;
 
         if (eventIndex < 2) {
-            objectId = "" + ((int) (8 * Math.random()) + 1);
+            objectId = "" + ((int) (9 * Math.random()) + 1);
         } else {
-            objectId = "" + ((int) (3 * Math.random()) + 1);
+            objectId = "" + ((int) (4 * Math.random()) + 1);
         }
 
         return new SensorEvent(sensorEventType, objectId);

@@ -2,6 +2,7 @@ package ru.sbt.mipt.oop.EventProcessor;
 
 import ru.sbt.mipt.oop.*;
 import ru.sbt.mipt.oop.HomeControl.HomeControl;
+import ru.sbt.mipt.oop.SmartHome.*;
 
 
 public class HallDoorEventProcessor implements EventProcessor {
@@ -16,29 +17,47 @@ public class HallDoorEventProcessor implements EventProcessor {
 
     @Override
     public void processEvent(SensorEvent event) {
-        switch (event.getType()) {
-            case DOOR_OPEN -> handleDoorOpen(event.getObjectId());
-            case DOOR_CLOSED -> handleDoorClosed(event.getObjectId());
+        // Even if the door is hall door it would get closed/opened by generic
+        // DoorEventProcessor; Here we only have to chek if the door
+        // being closed is in hall
+        // and if it is we turn off all the lights;
+        //
+        // With this we don't have to check type off door in DoorEventProcessor:
+        // all doors behave the same considering closing/opening.
+        if (event.getType() == SensorEventType.DOOR_CLOSED) {
+            handleDoorClosed(event.getObjectId());
         }
     }
 
-    private void handleDoorOpen(String doorId) {
-        Door door = SmartHomeUtility.findDoor(smartHome, doorId);
-        door.setOpen(true);
-        System.out.println("Hall door " + door.getId() + " was opened.");
-    }
-
-    private void handleDoorClosed(String doorId)  {
-        Door door = SmartHomeUtility.findDoor(smartHome, doorId);
-        door.setOpen(false);
-        System.out.println("Hall door " + door.getId() + " was closed.");
-
-        for (Room homeRoom : smartHome.getRooms()) {
-            for (Light light : homeRoom.getLights()) {
+    private void turnOffLights() {
+        smartHome.execute((object) -> {
+            if (object instanceof Light) {
+                Light light = (Light) object;
                 light.setOn(false);
-                SensorCommand command = new SensorCommand(CommandType.LIGHT_OFF, light.getId());
+                SensorCommand command = new SensorCommand(CommandType.LIGHT_OFF,
+                        light.getId());
                 homeControl.sendCommand(command);
             }
-        }
+        });
+    }
+
+    private void handleDoorClosed(String doorId) {
+        smartHome.execute(object -> {
+            if (object instanceof Room) {
+                Room room = (Room) object;
+                if (room.getName().equals("hall")) {
+                    room.execute(localObject -> {
+                        if (localObject instanceof Door) {
+                            Door door = (Door) localObject;
+                            if (door.getId().equals(doorId)) {
+                                turnOffLights();
+                                System.out.println("Turning off all the lights, " +
+                                        "as the hall door was closed");
+                            }
+                        }
+                    });
+                }
+            }
+        });
     }
 }

@@ -1,6 +1,7 @@
 package ru.sbt.mipt.oop.EventProcessor;
 
 import ru.sbt.mipt.oop.*;
+import ru.sbt.mipt.oop.SmartHome.*;
 
 
 public class DoorEventProcessor implements EventProcessor {
@@ -20,14 +21,26 @@ public class DoorEventProcessor implements EventProcessor {
     }
 
     private void handleDoorOpen(String doorId) {
-        Door door = SmartHomeUtility.findDoor(smartHome, doorId);
-        door.setOpen(true);
-        System.out.println("Door " + door.getId() + " was opened.");
+        smartHome.execute((object) -> {
+            if (object instanceof Door) {
+                Door door = (Door) object;
+                if (door.getId().equals(doorId)) {
+                    door.setOpen(true);
+                    System.out.println("Door " + door.getId() + " was opened.");
+                }
+            }
+        });
     }
 
     private void handleDoorClosed(String doorId)  {
-        Door door = SmartHomeUtility.findDoor(smartHome, doorId);
-        door.setOpen(false);
-        System.out.println("Door " + door.getId() + " was closed.");
+        smartHome.execute((object) -> {
+            if (object instanceof Door) {
+                Door door = (Door) object;
+                if (door.getId().equals(doorId)) {
+                    door.setOpen(false);
+                    System.out.println("Door " + door.getId() + " was closed.");
+                }
+            }
+        });
     }
 }

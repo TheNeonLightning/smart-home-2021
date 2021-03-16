@@ -1,5 +1,7 @@
 package ru.sbt.mipt.oop;
 
+import ru.sbt.mipt.oop.SmartHome.*;
+
 public class SmartHomeUtility {
     public static Room findRoom(SmartHome home, String doorId) {
         for (Room room : home.getRooms()) {
