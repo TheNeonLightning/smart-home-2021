@@ -14,6 +14,9 @@ import ru.sbt.mipt.oop.HomeRunner.SmartHomeRunner;
 import ru.sbt.mipt.oop.HomeSupervision.HomeSupervision;
 import ru.sbt.mipt.oop.HomeSupervision.HomeSupervisionSimulator;
 
+
+import java.util.Arrays;
+
 // class Application is used to set up specific realizations of interfaces
 // and to start smart home activity
 public class Application {
@@ -27,10 +30,10 @@ public class Application {
         SmartHome smartHome = homeProvider.provideHome();
 
         EventResolver eventResolver = new SmartHomeEventResolver(
-                smartHome,
-                new LightEventProcessor(smartHome),
-                new DoorEventProcessor(smartHome),
-                new HallDoorEventProcessor(homeControl, smartHome)
+                Arrays.asList(
+                        new LightEventProcessor(smartHome),
+                        new DoorEventProcessor(smartHome),
+                        new HallDoorEventProcessor(homeControl, smartHome))
         );
 
         HomeRunner homeRunner = new SmartHomeRunner(homeSupervision, eventResolver);
