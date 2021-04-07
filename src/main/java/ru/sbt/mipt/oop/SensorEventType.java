@@ -6,7 +6,9 @@ public enum SensorEventType {
     DOOR_OPEN,
     DOOR_CLOSED,
     ALARM_ACTIVATE,
-    ALARM_DEACTIVATE;
+    ALARM_DEACTIVATE,
+    DOOR_LOCKED,
+    DOOR_UNLOCKED;
 
     public int code;
 }

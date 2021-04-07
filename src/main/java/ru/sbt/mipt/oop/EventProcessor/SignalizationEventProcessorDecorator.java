@@ -24,7 +24,7 @@ public class SignalizationEventProcessorDecorator implements EventProcessor {
         if (isSignalizationEvent(event)) {
             eventProcessor.processEvent(event);
         }
-
+        // TODO should process alarm events first, then check signalization state and only then process generic event
         if (signalization.stateType() == ACTIVATED) {
             signalization.alarm();
             sendMessage();
@@ -34,7 +34,7 @@ public class SignalizationEventProcessorDecorator implements EventProcessor {
         if (signalization.stateType() == ALARM) {
             sendMessage();
         }
-        eventProcessor.processEvent(event);
+        eventProcessor.processEvent(event); // TODO might be a mistake as already done above
     }
 
     private boolean isSignalizationEvent(SensorEvent event) {

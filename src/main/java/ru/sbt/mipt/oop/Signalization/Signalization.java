@@ -14,6 +14,7 @@ public class Signalization {
         alarm = new Alarm();
         activated = new Activated(this);
         deactivated = new Deactivated(this);
+        state = deactivated;
     }
 
     public boolean checkCode(int code) {

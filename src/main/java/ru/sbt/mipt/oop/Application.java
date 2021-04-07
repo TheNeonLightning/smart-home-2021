@@ -1,57 +1,15 @@
 package ru.sbt.mipt.oop;
 
-import ru.sbt.mipt.oop.EventProcessor.*;
-import ru.sbt.mipt.oop.EventResolver.EventResolver;
-import ru.sbt.mipt.oop.EventResolver.SmartHomeEventResolver;
-import ru.sbt.mipt.oop.HomeControl.HomeControl;
-import ru.sbt.mipt.oop.HomeControl.HomeControlSimulator;
-import ru.sbt.mipt.oop.HomeProvider.HomeProvider;
-import ru.sbt.mipt.oop.HomeProvider.JsonHomeProvider;
-import ru.sbt.mipt.oop.HomeRunner.HomeRunner;
-import ru.sbt.mipt.oop.HomeRunner.SmartHomeRunner;
-import ru.sbt.mipt.oop.HomeSupervision.HomeSupervision;
-import ru.sbt.mipt.oop.HomeSupervision.HomeSupervisionSimulator;
-import ru.sbt.mipt.oop.Signalization.Signalization;
-import ru.sbt.mipt.oop.SmartHome.SmartHome;
+import com.coolcompany.smarthome.events.SensorEventsManager;
+import org.springframework.context.support.AbstractApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
-
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-
-// class Application is used to set up specific realizations of interfaces
-// and to start smart home activity
 public class Application {
 
-    public static void main(String... args) {
-
-        HomeControl homeControl = new HomeControlSimulator();
-        HomeSupervision homeSupervision = new HomeSupervisionSimulator();
-
-        HomeProvider homeProvider = new JsonHomeProvider("smart-home-1.js");
-        SmartHome smartHome = homeProvider.provideHome();
-
-        Signalization signalization = new Signalization(1234);
-
-        List<EventProcessor> processors =
-                Arrays.asList(
-                        new SignalizationEventProcessorDecorator(signalization,
-                                new LightEventProcessor(smartHome)),
-
-                        new SignalizationEventProcessorDecorator(signalization,
-                                new DoorEventProcessor(smartHome)),
-
-                        new SignalizationEventProcessorDecorator(signalization,
-                                new HallDoorEventProcessor(homeControl,
-                                        smartHome)),
-
-                        new AlarmEventProcessor(signalization)
-                );
-
-
-        EventResolver eventResolver = new SmartHomeEventResolver(processors);
-
-        HomeRunner homeRunner = new SmartHomeRunner(homeSupervision, eventResolver);
-        homeRunner.runHome();
+    public static void main(String[] args) {
+        AbstractApplicationContext context = new AnnotationConfigApplicationContext(ApplicationConfiguration.class);
+        SensorEventsManager sensorEventsManager = context.getBean(SensorEventsManager.class);
+        sensorEventsManager.start();
     }
+
 }
