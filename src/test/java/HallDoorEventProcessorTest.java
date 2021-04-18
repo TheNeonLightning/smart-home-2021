@@ -15,7 +15,6 @@ import ru.sbt.mipt.oop.SensorEvent;
 import ru.sbt.mipt.oop.SensorEventType;
 import ru.sbt.mipt.oop.SmartHome.Door;
 import ru.sbt.mipt.oop.SmartHome.SmartHome;
-import ru.sbt.mipt.oop.SmartHomeUtility;
 
 import java.util.Arrays;
 
@@ -73,14 +72,14 @@ public class HallDoorEventProcessorTest {
     private void checkAllLightsOn() {
         for (int id = 1; id < 9; ++id) {
             String lightId = Integer.valueOf(id).toString();
-            Assert.assertTrue(SmartHomeUtility.findLight(smartHome, lightId).isOn());
+            LightChecker.checkLight(smartHome, lightId, true);
         }
     }
 
     private void checkAllLightsOff() {
         for (int id = 1; id < 9; ++id) {
             String lightId = Integer.valueOf(id).toString();
-            Assert.assertFalse(SmartHomeUtility.findLight(smartHome, lightId).isOn());
+            LightChecker.checkLight(smartHome, lightId, false);
         }
     }
 }

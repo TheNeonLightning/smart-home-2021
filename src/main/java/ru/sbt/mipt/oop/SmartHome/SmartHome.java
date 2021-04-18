@@ -24,12 +24,4 @@ public class SmartHome implements Actionable {
     public SmartHome(Collection<Room> rooms) {
         this.rooms = rooms;
     }
-
-    public void addRoom(Room room) {
-        rooms.add(room);
-    }
-
-    public Collection<Room> getRooms() {
-        return rooms;
-    }
 }
