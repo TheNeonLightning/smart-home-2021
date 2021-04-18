@@ -32,7 +32,7 @@ public class HallDoorEventProcessor implements EventProcessor {
 
 
     private void handleDoorClosed(String doorId)  {
-        Room room = SmartHomeUtility.findRoom(smartHome, doorId);
+        Room room = findRoom(doorId);
         if (room.getName().equals("hall")) {
             for (Room homeRoom : smartHome.getRooms()) {
                 for (Light light : homeRoom.getLights()) {
@@ -44,5 +44,16 @@ public class HallDoorEventProcessor implements EventProcessor {
             }
             System.out.println("Turning off all the lights, hall door was closed");
         }
+    }
+
+    private Room findRoom(String doorId) {
+        for (Room room : smartHome.getRooms()) {
+            for (Door door : room.getDoors()) {
+                if (door.getId().equals(doorId)) {
+                    return room;
+                }
+            }
+        }
+        throw new RuntimeException("Door ID not found");
     }
 }

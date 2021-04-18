@@ -20,14 +20,25 @@ public class DoorEventProcessor implements EventProcessor {
     }
 
     private void handleDoorOpen(String doorId) {
-        Door door = SmartHomeUtility.findDoor(smartHome, doorId);
+        Door door = findDoor(doorId);
         door.setOpen(true);
         System.out.println("Door " + door.getId() + " was opened.");
     }
 
     private void handleDoorClosed(String doorId)  {
-        Door door = SmartHomeUtility.findDoor(smartHome, doorId);
+        Door door = findDoor(doorId);
         door.setOpen(false);
         System.out.println("Door " + door.getId() + " was closed.");
+    }
+
+    private Door findDoor(String doorId) {
+        for (Room room : smartHome.getRooms()) {
+            for (Door door : room.getDoors()) {
+                if (door.getId().equals(doorId)) {
+                    return door;
+                }
+            }
+        }
+        throw new RuntimeException("Door ID not found");
     }
 }
