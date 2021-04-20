@@ -19,4 +19,10 @@ public class Deactivated extends State {
             signalization.setStateActivated();
         }
     }
+
+    // Still have to rework task 3, will change soon
+    @Override
+    public void alarm() {
+        signalization.setStateAlarm();
+    }
 }

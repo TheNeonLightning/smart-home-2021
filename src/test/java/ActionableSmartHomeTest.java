@@ -1,6 +1,6 @@
 import org.junit.Assert;
 import org.junit.Test;
-import ru.sbt.mipt.oop.Action;
+import ru.sbt.mipt.oop.SmartHome.Action;
 import ru.sbt.mipt.oop.HomeProvider.HomeProvider;
 import ru.sbt.mipt.oop.HomeProvider.JsonHomeProvider;
 import ru.sbt.mipt.oop.SmartHome.Door;
@@ -8,8 +8,6 @@ import ru.sbt.mipt.oop.SmartHome.Light;
 import ru.sbt.mipt.oop.SmartHome.Room;
 import ru.sbt.mipt.oop.SmartHome.SmartHome;
 import ru.sbt.mipt.oop.SmartHomeUtility;
-
-import java.util.concurrent.atomic.AtomicInteger;
 
 
 public class ActionableSmartHomeTest {

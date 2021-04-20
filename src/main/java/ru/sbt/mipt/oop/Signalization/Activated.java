@@ -21,4 +21,10 @@ public class Activated extends State {
             signalization.setStateAlarm();
         }
     }
+
+    // Still have to rework task 3, will change soon
+    @Override
+    public void alarm() {
+        signalization.setStateAlarm();
+    }
 }

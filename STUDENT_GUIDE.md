@@ -361,7 +361,7 @@ SensorEventsManager sensorEventsManager(Collection<EventProcessor> eventProcesso
 
 ## Задание 5
 
-- Создайте бины для `RemoteControlRegistry`, имплементации `RemoteControl` и классов команд
-- Зарегистрируйте в имплементации `RemoteControl` кнопки с командами как в задании (лучше все сделать внутри конфигурации)
-- Зарегистрируйте имплементацию `RemoteControl` в `RemoteControlRegistry`.
-- Добавьте тесты по имплементации `RemoteControl` и командам.
+- Создайте бины для `RemoteControlRegistry`, имплементации `ru.sbt.mipt.oop.RemoteControl` и классов команд
+- Зарегистрируйте в имплементации `ru.sbt.mipt.oop.RemoteControl` кнопки с командами как в задании (лучше все сделать внутри конфигурации)
+- Зарегистрируйте имплементацию `ru.sbt.mipt.oop.RemoteControl` в `RemoteControlRegistry`.
+- Добавьте тесты по имплементации `ru.sbt.mipt.oop.RemoteControl` и командам.

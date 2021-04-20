@@ -1,5 +1,7 @@
 package ru.sbt.mipt.oop;
 
+import ru.sbt.mipt.oop.RemoteControl.Command;
+
 public class SensorCommand {
     private final CommandType type;
     private final String objectId;
@@ -15,5 +17,9 @@ public class SensorCommand {
                 "type=" + type +
                 ", objectId='" + objectId + '\'' +
                 '}';
+    }
+
+    public CommandType getType() {
+        return type;
     }
 }
