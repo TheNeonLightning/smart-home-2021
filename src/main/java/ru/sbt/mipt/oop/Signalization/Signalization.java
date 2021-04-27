@@ -8,9 +8,9 @@ public class Signalization {
     private State state;
     private final int code;
 
-    private final Alarm alarm;
-    private final Activated activated;
-    private final Deactivated deactivated;
+    private final State alarm;
+    private final State activated;
+    private final State deactivated;
 
     public Signalization(int code) {
         this.code = code;
