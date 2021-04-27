@@ -1,12 +1,13 @@
 package ru.sbt.mipt.oop.Signalization;
 
-public abstract class State {
 
-    void activate(int code) {}
+public interface State {
 
-    void deactivate(int code) {}
+    void activate(int code);
 
-    void alarm() {}
+    void deactivate(int code);
 
-    abstract StateType stateType();
+    void alarm();
+
+    StateType stateType();
 }

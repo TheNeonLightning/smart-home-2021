@@ -1,9 +1,7 @@
 package ru.sbt.mipt.oop.SmartHome;
 
-import ru.sbt.mipt.oop.Action;
-import ru.sbt.mipt.oop.Actionable;
-
 import java.util.Collection;
+
 
 public class Room implements Actionable {
     private Collection<Light> lights;

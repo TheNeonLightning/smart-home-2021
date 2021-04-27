@@ -1,6 +1,9 @@
 package ru.sbt.mipt.oop.Signalization;
 
-public class Deactivated extends State {
+import static ru.sbt.mipt.oop.Signalization.StateType.DEACTIVATED;
+
+
+public class Deactivated implements State {
 
     private final Signalization signalization;
 
@@ -9,14 +12,20 @@ public class Deactivated extends State {
     }
 
     @Override
-    public StateType stateType() {
-        return StateType.DEACTIVATED;
-    }
-
-    @Override
     public void activate(int code) {
         if (signalization.checkCode(code)) {
             signalization.setStateActivated();
         }
+    }
+
+    @Override
+    public void deactivate(int code) {}
+
+    @Override
+    public void alarm() {}
+
+    @Override
+    public StateType stateType() {
+        return DEACTIVATED;
     }
 }

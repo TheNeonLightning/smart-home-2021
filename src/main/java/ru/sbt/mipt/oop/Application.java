@@ -11,13 +11,17 @@ import ru.sbt.mipt.oop.HomeRunner.HomeRunner;
 import ru.sbt.mipt.oop.HomeRunner.SmartHomeRunner;
 import ru.sbt.mipt.oop.HomeSupervision.HomeSupervision;
 import ru.sbt.mipt.oop.HomeSupervision.HomeSupervisionSimulator;
+import ru.sbt.mipt.oop.Notification.ContinuousNotifier;
+import ru.sbt.mipt.oop.Notification.Notifier;
+import ru.sbt.mipt.oop.Notification.SMSContinuousNotifier;
+import ru.sbt.mipt.oop.Notification.SMSNotifier;
 import ru.sbt.mipt.oop.Signalization.Signalization;
 import ru.sbt.mipt.oop.SmartHome.SmartHome;
 
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+
 
 // class Application is used to set up specific realizations of interfaces
 // and to start smart home activity
@@ -33,21 +37,22 @@ public class Application {
 
         Signalization signalization = new Signalization(1234);
 
+        ContinuousNotifier notifier = new SMSContinuousNotifier(new SMSNotifier(), 100);
+
         List<EventProcessor> processors =
                 Arrays.asList(
                         new SignalizationEventProcessorDecorator(signalization,
-                                new LightEventProcessor(smartHome)),
+                                new LightEventProcessor(smartHome), notifier),
 
                         new SignalizationEventProcessorDecorator(signalization,
-                                new DoorEventProcessor(smartHome)),
+                                new DoorEventProcessor(smartHome), notifier),
 
                         new SignalizationEventProcessorDecorator(signalization,
                                 new HallDoorEventProcessor(homeControl,
-                                        smartHome)),
+                                        smartHome), notifier),
 
                         new AlarmEventProcessor(signalization)
                 );
-
 
         EventResolver eventResolver = new SmartHomeEventResolver(processors);
 

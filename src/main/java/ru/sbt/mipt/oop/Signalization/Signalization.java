@@ -1,5 +1,8 @@
 package ru.sbt.mipt.oop.Signalization;
 
+import static ru.sbt.mipt.oop.Signalization.StateType.*;
+
+
 public class Signalization {
 
     private State state;
@@ -11,17 +14,22 @@ public class Signalization {
 
     public Signalization(int code) {
         this.code = code;
-        alarm = new Alarm();
+        alarm = new Alarm(this);
         activated = new Activated(this);
         deactivated = new Deactivated(this);
+        state = deactivated;
     }
 
-    public boolean checkCode(int code) {
-       return this.code == code;
+    public boolean isAlarmed() {
+        return state.stateType() == ALARM;
     }
 
-    public StateType stateType() {
-        return state.stateType();
+    public boolean isActivated() {
+        return state.stateType() == ACTIVATED;
+    }
+
+    public boolean isDeactivated() {
+        return state.stateType() == DEACTIVATED;
     }
 
     public void activate(int code) {
@@ -34,6 +42,10 @@ public class Signalization {
 
     public void alarm() {
         state.alarm();
+    }
+
+    boolean checkCode(int code) {
+       return this.code == code;
     }
 
     void setStateAlarm() {

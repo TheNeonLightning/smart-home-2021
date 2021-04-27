@@ -1,21 +1,23 @@
 package ru.sbt.mipt.oop.EventProcessor;
 
+import ru.sbt.mipt.oop.Notification.ContinuousNotifier;
+import ru.sbt.mipt.oop.Notification.Notifier;
 import ru.sbt.mipt.oop.SensorEvent;
 import ru.sbt.mipt.oop.SensorEventType;
-import ru.sbt.mipt.oop.Signalization.Alarm;
 import ru.sbt.mipt.oop.Signalization.Signalization;
-import static ru.sbt.mipt.oop.Signalization.StateType.ACTIVATED;
-import static ru.sbt.mipt.oop.Signalization.StateType.ALARM;
 
 public class SignalizationEventProcessorDecorator implements EventProcessor {
 
     private final Signalization signalization;
     private final EventProcessor eventProcessor;
+    private final ContinuousNotifier notifier;
 
     public SignalizationEventProcessorDecorator(Signalization signalization,
-                                                EventProcessor eventProcessor) {
+                                                EventProcessor eventProcessor,
+                                                ContinuousNotifier notifier) {
         this.signalization = signalization;
         this.eventProcessor = eventProcessor;
+        this.notifier = notifier;
     }
 
     @Override
@@ -23,26 +25,21 @@ public class SignalizationEventProcessorDecorator implements EventProcessor {
 
         if (isSignalizationEvent(event)) {
             eventProcessor.processEvent(event);
-        }
 
-        if (signalization.stateType() == ACTIVATED) {
+        } else if (signalization.isActivated()) {
             signalization.alarm();
-            sendMessage();
-        }
+            notifier.startNotifying();
 
-        // TODO sending messages should not depend on events
-        if (signalization.stateType() == ALARM) {
-            sendMessage();
+        } else if (signalization.isAlarmed()) {
+            notifier.startNotifying();
+
+        } else {
+            eventProcessor.processEvent(event);
         }
-        eventProcessor.processEvent(event);
     }
 
     private boolean isSignalizationEvent(SensorEvent event) {
         return event.getType() == SensorEventType.ALARM_ACTIVATE ||
-                event.getType() == SensorEventType.ALARM_DEACTIVATE;
-    }
-
-    private void sendMessage() {
-        System.out.println("Sending sms");
+               event.getType() == SensorEventType.ALARM_DEACTIVATE;
     }
 }
