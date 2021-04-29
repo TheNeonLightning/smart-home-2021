@@ -1,4 +1,5 @@
-package ru.sbt.mipt.oop;
+package ru.sbt.mipt.oop.SmartHome;
+
 
 @FunctionalInterface
 public interface Action {

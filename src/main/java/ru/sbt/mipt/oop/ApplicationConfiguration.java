@@ -10,6 +10,9 @@ import ru.sbt.mipt.oop.HomeProvider.JsonHomeProvider;
 import ru.sbt.mipt.oop.Signalization.Signalization;
 import ru.sbt.mipt.oop.SmartHome.SmartHome;
 
+import java.util.Collection;
+import java.util.Map;
+
 public class ApplicationConfiguration {
 
     @Bean
@@ -19,50 +22,48 @@ public class ApplicationConfiguration {
     }
 
     @Bean
-    public LightEventProcessor lightEventProcessor() {
-        return new LightEventProcessor(smartHome());
+    public Map<String, SensorEventType> sensorEventTypeMap() {
+        return Map.of(
+            "LightIsOn", SensorEventType.LIGHT_ON,
+            "LightIsOff", SensorEventType.LIGHT_OFF,
+            "DoorIsOpen", SensorEventType.DOOR_OPEN,
+            "DoorIsClosed", SensorEventType.DOOR_CLOSED,
+            "DoorIsLocked", SensorEventType.DOOR_LOCKED,
+            "DoorIsUnlocked", SensorEventType.DOOR_UNLOCKED
+        );
+    }
+    
+    @Bean
+    public EventProcessor lightEventProcessor() {
+        return new SignalizationEventProcessorDecorator(signalization(),
+                new LightEventProcessor(smartHome()));
     }
 
     @Bean
-    public DoorEventProcessor doorEventProcessor() {
-        return new DoorEventProcessor(smartHome());
+    public EventProcessor doorEventProcessor() {
+        return new SignalizationEventProcessorDecorator(signalization(),
+                new DoorEventProcessor(smartHome()));
     }
 
     @Bean
-    public HallDoorEventProcessor hallDoorEventProcessor() {
-        return new HallDoorEventProcessor(homeControl(), smartHome());
+    public EventProcessor hallDoorEventProcessor() {
+        return new SignalizationEventProcessorDecorator(signalization(),
+                new HallDoorEventProcessor(homeControl(), smartHome()));
     }
 
     @Bean
-    public AlarmEventProcessor alarmEventProcessor() {
+    public EventProcessor alarmEventProcessor() {
         return new AlarmEventProcessor(signalization());
     }
 
     @Bean
-    public SensorEventsManager sensorEventsManager() {
+    public SensorEventsManager sensorEventsManager(Collection<EventProcessor> eventProcessors) {
         SensorEventsManager sensorEventsManager = new SensorEventsManager();
 
-        EventProcessor eventProcessor =
-                new SignalizationEventProcessorDecorator(signalization(),
-                        lightEventProcessor());
-        sensorEventsManager.registerEventHandler(
-                new CCEventHandlerAdapter(eventProcessor));
-
-        eventProcessor =
-                new SignalizationEventProcessorDecorator(signalization(),
-                        doorEventProcessor());
-        sensorEventsManager.registerEventHandler(
-                new CCEventHandlerAdapter(eventProcessor));
-
-        eventProcessor =
-                new SignalizationEventProcessorDecorator(signalization(),
-                        hallDoorEventProcessor());
-        sensorEventsManager.registerEventHandler(
-                new CCEventHandlerAdapter(eventProcessor));
-
-        sensorEventsManager.registerEventHandler(
-                new CCEventHandlerAdapter(alarmEventProcessor()));
-
+        for (EventProcessor processor : eventProcessors) {
+            sensorEventsManager.registerEventHandler(
+                    new CCEventHandlerAdapter(processor, sensorEventTypeMap()));
+        }
         return sensorEventsManager;
     }
 

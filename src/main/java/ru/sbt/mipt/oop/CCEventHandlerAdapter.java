@@ -3,12 +3,17 @@ package ru.sbt.mipt.oop;
 import com.coolcompany.smarthome.events.CCSensorEvent;
 import ru.sbt.mipt.oop.EventProcessor.EventProcessor;
 
+import java.util.Map;
+
 public class CCEventHandlerAdapter implements com.coolcompany.smarthome.events.EventHandler {
 
-    EventProcessor eventProcessor;
+    private final EventProcessor eventProcessor;
+    private final Map<String, SensorEventType> sensorEventTypeMap;
 
-    public CCEventHandlerAdapter(EventProcessor eventProcessor) {
+    public CCEventHandlerAdapter(EventProcessor eventProcessor,
+                                 Map<String, SensorEventType> sensorEventTypeMap) {
         this.eventProcessor = eventProcessor;
+        this.sensorEventTypeMap = sensorEventTypeMap;
     }
 
     @Override
@@ -17,7 +22,10 @@ public class CCEventHandlerAdapter implements com.coolcompany.smarthome.events.E
     }
 
     private SensorEvent adaptEvent(CCSensorEvent event) {
-        return new SensorEvent(adaptEventType(event.getEventType()), event.getObjectId());
+        return new SensorEvent(
+                sensorEventTypeMap.get(event.getEventType()),
+                event.getObjectId()
+        );
     }
 
     /**
