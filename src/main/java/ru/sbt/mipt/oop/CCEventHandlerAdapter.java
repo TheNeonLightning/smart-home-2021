@@ -8,12 +8,12 @@ import java.util.Map;
 public class CCEventHandlerAdapter implements com.coolcompany.smarthome.events.EventHandler {
 
     private final EventProcessor eventProcessor;
-    private final Map<String, SensorEventType> sensorEventTypeMap;
+    private final Map<String, SensorEventType> eventAdapterMap;
 
     public CCEventHandlerAdapter(EventProcessor eventProcessor,
-                                 Map<String, SensorEventType> sensorEventTypeMap) {
+                                 Map<String, SensorEventType> eventAdapterMap) {
         this.eventProcessor = eventProcessor;
-        this.sensorEventTypeMap = sensorEventTypeMap;
+        this.eventAdapterMap = eventAdapterMap;
     }
 
     @Override
@@ -23,7 +23,7 @@ public class CCEventHandlerAdapter implements com.coolcompany.smarthome.events.E
 
     private SensorEvent adaptEvent(CCSensorEvent event) {
         return new SensorEvent(
-                sensorEventTypeMap.get(event.getEventType()),
+                eventAdapterMap.get(event.getEventType()),
                 event.getObjectId()
         );
     }

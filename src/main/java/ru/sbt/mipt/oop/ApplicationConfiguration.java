@@ -22,7 +22,7 @@ public class ApplicationConfiguration {
     }
 
     @Bean
-    public Map<String, SensorEventType> sensorEventTypeMap() {
+    public Map<String, SensorEventType> eventAdapterMap() {
         return Map.of(
             "LightIsOn", SensorEventType.LIGHT_ON,
             "LightIsOff", SensorEventType.LIGHT_OFF,
@@ -32,7 +32,7 @@ public class ApplicationConfiguration {
             "DoorIsUnlocked", SensorEventType.DOOR_UNLOCKED
         );
     }
-    
+
     @Bean
     public EventProcessor lightEventProcessor() {
         return new SignalizationEventProcessorDecorator(signalization(),
@@ -62,7 +62,7 @@ public class ApplicationConfiguration {
 
         for (EventProcessor processor : eventProcessors) {
             sensorEventsManager.registerEventHandler(
-                    new CCEventHandlerAdapter(processor, sensorEventTypeMap()));
+                    new CCEventHandlerAdapter(processor, eventAdapterMap()));
         }
         return sensorEventsManager;
     }
