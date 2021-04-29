@@ -8,6 +8,4 @@ public interface State {
     void deactivate(int code);
 
     void alarm();
-
-    StateType stateType();
 }

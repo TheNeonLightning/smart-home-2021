@@ -1,7 +1,5 @@
 package ru.sbt.mipt.oop.Signalization;
 
-import static ru.sbt.mipt.oop.Signalization.StateType.DEACTIVATED;
-
 
 public class Deactivated implements State {
 
@@ -23,9 +21,4 @@ public class Deactivated implements State {
 
     @Override
     public void alarm() {}
-
-    @Override
-    public StateType stateType() {
-        return DEACTIVATED;
-    }
 }

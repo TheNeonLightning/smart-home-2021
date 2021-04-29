@@ -1,7 +1,5 @@
 package ru.sbt.mipt.oop.Signalization;
 
-import static ru.sbt.mipt.oop.Signalization.StateType.ACTIVATED;
-
 
 public class Activated implements State {
 
@@ -26,10 +24,5 @@ public class Activated implements State {
     @Override
     public void alarm() {
         signalization.setStateAlarm();
-    }
-
-    @Override
-    public StateType stateType() {
-        return ACTIVATED;
     }
 }

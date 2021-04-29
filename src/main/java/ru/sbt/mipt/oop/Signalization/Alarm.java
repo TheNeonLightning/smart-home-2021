@@ -1,7 +1,5 @@
 package ru.sbt.mipt.oop.Signalization;
 
-import static ru.sbt.mipt.oop.Signalization.StateType.ALARM;
-
 
 public class Alarm implements State {
 
@@ -25,9 +23,4 @@ public class Alarm implements State {
 
     @Override
     public void alarm() {}
-
-    @Override
-    public StateType stateType() {
-        return ALARM;
-    }
 }

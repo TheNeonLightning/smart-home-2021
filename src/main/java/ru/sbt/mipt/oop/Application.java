@@ -12,8 +12,7 @@ import ru.sbt.mipt.oop.HomeRunner.SmartHomeRunner;
 import ru.sbt.mipt.oop.HomeSupervision.HomeSupervision;
 import ru.sbt.mipt.oop.HomeSupervision.HomeSupervisionSimulator;
 import ru.sbt.mipt.oop.Notification.ContinuousNotifier;
-import ru.sbt.mipt.oop.Notification.Notifier;
-import ru.sbt.mipt.oop.Notification.SMSContinuousNotifier;
+import ru.sbt.mipt.oop.Notification.ContinuousNotifierImpl;
 import ru.sbt.mipt.oop.Notification.SMSNotifier;
 import ru.sbt.mipt.oop.Signalization.Signalization;
 import ru.sbt.mipt.oop.SmartHome.SmartHome;
@@ -37,7 +36,7 @@ public class Application {
 
         Signalization signalization = new Signalization(1234);
 
-        ContinuousNotifier notifier = new SMSContinuousNotifier(new SMSNotifier(), 100);
+        ContinuousNotifier notifier = new ContinuousNotifierImpl(new SMSNotifier(), 100);
 
         List<EventProcessor> processors =
                 Arrays.asList(
