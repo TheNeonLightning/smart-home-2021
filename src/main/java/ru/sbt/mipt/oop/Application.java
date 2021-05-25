@@ -15,7 +15,6 @@ import ru.sbt.mipt.oop.HomeSupervision.HomeSupervision;
 import ru.sbt.mipt.oop.HomeSupervision.HomeSupervisionSimulator;
 import ru.sbt.mipt.oop.SmartHome.SmartHome;
 
-
 import java.util.Arrays;
 
 // class Application is used to set up specific realizations of interfaces
