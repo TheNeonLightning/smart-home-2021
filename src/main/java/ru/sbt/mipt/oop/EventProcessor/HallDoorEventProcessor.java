@@ -1,7 +1,10 @@
 package ru.sbt.mipt.oop.EventProcessor;
 
-import ru.sbt.mipt.oop.*;
 import ru.sbt.mipt.oop.HomeControl.HomeControl;
+import ru.sbt.mipt.oop.SensorsInteraction.CommandType;
+import ru.sbt.mipt.oop.SensorsInteraction.SensorCommand;
+import ru.sbt.mipt.oop.SensorsInteraction.SensorEvent;
+import ru.sbt.mipt.oop.SensorsInteraction.SensorEventType;
 import ru.sbt.mipt.oop.SmartHome.*;
 
 

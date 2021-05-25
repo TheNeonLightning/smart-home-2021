@@ -11,6 +11,7 @@ import ru.sbt.mipt.oop.Notification.ContinuousNotifier;
 import ru.sbt.mipt.oop.Notification.ContinuousNotifierImpl;
 import ru.sbt.mipt.oop.Notification.Notifier;
 import ru.sbt.mipt.oop.Notification.SMSNotifier;
+import ru.sbt.mipt.oop.SensorsInteraction.SensorEventType;
 import ru.sbt.mipt.oop.Signalization.Signalization;
 import ru.sbt.mipt.oop.SmartHome.SmartHome;
 

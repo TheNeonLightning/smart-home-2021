@@ -1,11 +1,10 @@
-import org.junit.Assert;
 import org.junit.Test;
 import ru.sbt.mipt.oop.EventProcessor.EventProcessor;
 import ru.sbt.mipt.oop.EventProcessor.LightEventProcessor;
 import ru.sbt.mipt.oop.HomeProvider.HomeProvider;
 import ru.sbt.mipt.oop.HomeProvider.JsonHomeProvider;
-import ru.sbt.mipt.oop.SensorEvent;
-import ru.sbt.mipt.oop.SensorEventType;
+import ru.sbt.mipt.oop.SensorsInteraction.SensorEvent;
+import ru.sbt.mipt.oop.SensorsInteraction.SensorEventType;
 import ru.sbt.mipt.oop.SmartHome.SmartHome;
 
 public class LightEventProcessorTest {

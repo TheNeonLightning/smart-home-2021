@@ -2,7 +2,7 @@ package ru.sbt.mipt.oop.HomeRunner;
 
 import ru.sbt.mipt.oop.EventResolver.EventResolver;
 import ru.sbt.mipt.oop.HomeSupervision.HomeSupervision;
-import ru.sbt.mipt.oop.SensorEvent;
+import ru.sbt.mipt.oop.SensorsInteraction.SensorEvent;
 
 public class SmartHomeRunner implements HomeRunner {
 

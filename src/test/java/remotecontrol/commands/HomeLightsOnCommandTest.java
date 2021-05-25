@@ -3,7 +3,7 @@ package remotecontrol.commands;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
-import ru.sbt.mipt.oop.CommandType;
+import ru.sbt.mipt.oop.SensorsInteraction.CommandType;
 import ru.sbt.mipt.oop.HomeProvider.HomeProvider;
 import ru.sbt.mipt.oop.HomeProvider.JsonHomeProvider;
 import ru.sbt.mipt.oop.RemoteControl.Command;

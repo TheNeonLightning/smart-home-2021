@@ -1,7 +1,7 @@
 package ru.sbt.mipt.oop.HomeSupervision;
 
-import ru.sbt.mipt.oop.SensorEvent;
-import ru.sbt.mipt.oop.SensorEventType;
+import ru.sbt.mipt.oop.SensorsInteraction.SensorEvent;
+import ru.sbt.mipt.oop.SensorsInteraction.SensorEventType;
 
 public class HomeSupervisionSimulator implements HomeSupervision {
 

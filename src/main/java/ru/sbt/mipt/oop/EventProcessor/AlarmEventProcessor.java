@@ -1,7 +1,7 @@
 package ru.sbt.mipt.oop.EventProcessor;
 
-import ru.sbt.mipt.oop.SensorEvent;
-import ru.sbt.mipt.oop.SensorEventType;
+import ru.sbt.mipt.oop.SensorsInteraction.SensorEvent;
+import ru.sbt.mipt.oop.SensorsInteraction.SensorEventType;
 import ru.sbt.mipt.oop.Signalization.Signalization;
 
 public class AlarmEventProcessor implements EventProcessor {

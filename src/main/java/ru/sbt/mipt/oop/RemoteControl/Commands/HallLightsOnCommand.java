@@ -1,9 +1,9 @@
 package ru.sbt.mipt.oop.RemoteControl.Commands;
 
-import ru.sbt.mipt.oop.CommandType;
+import ru.sbt.mipt.oop.SensorsInteraction.CommandType;
 import ru.sbt.mipt.oop.HomeControl.HomeControl;
 import ru.sbt.mipt.oop.RemoteControl.Command;
-import ru.sbt.mipt.oop.SensorCommand;
+import ru.sbt.mipt.oop.SensorsInteraction.SensorCommand;
 import ru.sbt.mipt.oop.SmartHome.Light;
 import ru.sbt.mipt.oop.SmartHome.Room;
 import ru.sbt.mipt.oop.SmartHome.SmartHome;

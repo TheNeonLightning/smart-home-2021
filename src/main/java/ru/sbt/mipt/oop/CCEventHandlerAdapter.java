@@ -2,6 +2,8 @@ package ru.sbt.mipt.oop;
 
 import com.coolcompany.smarthome.events.CCSensorEvent;
 import ru.sbt.mipt.oop.EventProcessor.EventProcessor;
+import ru.sbt.mipt.oop.SensorsInteraction.SensorEvent;
+import ru.sbt.mipt.oop.SensorsInteraction.SensorEventType;
 
 import java.util.Map;
 

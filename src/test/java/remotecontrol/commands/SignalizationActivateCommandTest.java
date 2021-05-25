@@ -3,10 +3,8 @@ package remotecontrol.commands;
 import org.junit.Assert;
 import org.junit.Test;
 import ru.sbt.mipt.oop.RemoteControl.Command;
-import ru.sbt.mipt.oop.RemoteControl.Commands.AlarmOnCommand;
 import ru.sbt.mipt.oop.RemoteControl.Commands.SignalizationActivateCommand;
 import ru.sbt.mipt.oop.Signalization.Signalization;
-import ru.sbt.mipt.oop.Signalization.StateType;
 
 public class SignalizationActivateCommandTest {
 
@@ -18,6 +16,6 @@ public class SignalizationActivateCommandTest {
         Command command = new SignalizationActivateCommand(signalization);
         command.execute();
 
-        Assert.assertEquals(StateType.ACTIVATED, signalization.stateType());
+        Assert.assertTrue(signalization.isActivated());
     }
 }

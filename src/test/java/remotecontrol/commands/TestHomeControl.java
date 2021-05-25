@@ -1,8 +1,8 @@
 package remotecontrol.commands;
 
-import ru.sbt.mipt.oop.CommandType;
+import ru.sbt.mipt.oop.SensorsInteraction.CommandType;
 import ru.sbt.mipt.oop.HomeControl.HomeControl;
-import ru.sbt.mipt.oop.SensorCommand;
+import ru.sbt.mipt.oop.SensorsInteraction.SensorCommand;
 
 class TestHomeControl implements HomeControl {
 

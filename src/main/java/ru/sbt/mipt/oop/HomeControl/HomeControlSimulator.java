@@ -1,6 +1,6 @@
 package ru.sbt.mipt.oop.HomeControl;
 
-import ru.sbt.mipt.oop.SensorCommand;
+import ru.sbt.mipt.oop.SensorsInteraction.SensorCommand;
 
 public class HomeControlSimulator implements HomeControl {
 
