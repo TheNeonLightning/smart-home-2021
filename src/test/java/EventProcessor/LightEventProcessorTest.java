@@ -7,7 +7,6 @@ import ru.sbt.mipt.oop.HomeProvider.JsonHomeProvider;
 import ru.sbt.mipt.oop.SensorEvent;
 import ru.sbt.mipt.oop.SensorEventType;
 import ru.sbt.mipt.oop.SmartHome.SmartHome;
-import ru.sbt.mipt.oop.SmartHomeUtility;
 
 public class LightEventProcessorTest {
 
@@ -58,7 +57,7 @@ public class LightEventProcessorTest {
 
             SensorEvent event = new SensorEvent(SensorEventType.LIGHT_OFF, lightId);
             eventProcessor.processEvent(event);
-            Assert.assertFalse(SmartHomeUtility.findLight(smartHome, lightId).isOn());
+            LightChecker.checkLight(smartHome, lightId, false);
         }
     }
 
@@ -68,16 +67,14 @@ public class LightEventProcessorTest {
 
             SensorEvent event = new SensorEvent(SensorEventType.LIGHT_ON, lightId);
             eventProcessor.processEvent(event);
-            Assert.assertTrue(SmartHomeUtility.findLight(smartHome, lightId).isOn());
+            LightChecker.checkLight(smartHome, lightId, true);
         }
-
-
     }
 
     private void checkAllLightsOff() {
         for (int id = 1; id < 9; ++id) {
             String lightId = Integer.valueOf(id).toString();
-            Assert.assertFalse(SmartHomeUtility.findLight(smartHome, lightId).isOn());
+            LightChecker.checkLight(smartHome, lightId, false);
         }
     }
 }
