@@ -9,7 +9,6 @@ import ru.sbt.mipt.oop.SensorEvent;
 import ru.sbt.mipt.oop.SensorEventType;
 import ru.sbt.mipt.oop.SmartHome.Door;
 import ru.sbt.mipt.oop.SmartHome.SmartHome;
-import ru.sbt.mipt.oop.SmartHomeUtility;
 
 
 public class DoorEventProcessorTest {
@@ -61,7 +60,7 @@ public class DoorEventProcessorTest {
 
             SensorEvent event = new SensorEvent(SensorEventType.DOOR_OPEN, doorId);
             eventProcessor.processEvent(event);
-            Assert.assertTrue(SmartHomeUtility.findDoor(smartHome, doorId).isOpen());
+            DoorChecker.checkDoor(smartHome, doorId, true);
         }
     }
 
@@ -71,14 +70,14 @@ public class DoorEventProcessorTest {
 
             SensorEvent event = new SensorEvent(SensorEventType.DOOR_CLOSED, doorId);
             eventProcessor.processEvent(event);
-            Assert.assertFalse(SmartHomeUtility.findDoor(smartHome, doorId).isOpen());
+            DoorChecker.checkDoor(smartHome, doorId, false);
         }
     }
 
     private void checkAllDoorsClosed() {
         for (int id = 1; id < 5; ++id) {
             String doorId = Integer.valueOf(id).toString();
-            Assert.assertFalse(SmartHomeUtility.findDoor(smartHome, doorId).isOpen());
+            DoorChecker.checkDoor(smartHome, doorId, false);
         }
     }
 }
