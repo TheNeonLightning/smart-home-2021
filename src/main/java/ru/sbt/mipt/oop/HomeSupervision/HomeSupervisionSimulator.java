@@ -3,7 +3,6 @@ package ru.sbt.mipt.oop.HomeSupervision;
 import ru.sbt.mipt.oop.SensorEvent;
 import ru.sbt.mipt.oop.SensorEventType;
 
-
 public class HomeSupervisionSimulator implements HomeSupervision {
 
     // original version of this function could generate an invalid combination

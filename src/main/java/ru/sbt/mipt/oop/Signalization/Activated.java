@@ -1,6 +1,5 @@
 package ru.sbt.mipt.oop.Signalization;
 
-
 public class Activated implements State {
 
     private final Signalization signalization;

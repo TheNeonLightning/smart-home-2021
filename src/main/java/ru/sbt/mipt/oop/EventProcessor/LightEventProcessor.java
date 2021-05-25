@@ -3,7 +3,6 @@ package ru.sbt.mipt.oop.EventProcessor;
 import ru.sbt.mipt.oop.*;
 import ru.sbt.mipt.oop.SmartHome.*;
 
-
 public class LightEventProcessor implements EventProcessor {
 
     private final SmartHome smartHome;

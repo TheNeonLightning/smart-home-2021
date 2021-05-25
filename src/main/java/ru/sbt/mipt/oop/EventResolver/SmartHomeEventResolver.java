@@ -2,7 +2,6 @@ package ru.sbt.mipt.oop.EventResolver;
 
 import ru.sbt.mipt.oop.EventProcessor.EventProcessor;
 import ru.sbt.mipt.oop.SensorEvent;
-import ru.sbt.mipt.oop.Signalization.Signalization;
 
 import java.util.List;
 

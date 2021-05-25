@@ -44,7 +44,7 @@ public class ApplicationConfiguration {
 
     @Bean
     public ContinuousNotifier continuousNotifierImpl() {
-        return new ContinuousNotifierImpl(smsNotifier(), 100);
+        return new ContinuousNotifierImpl(smsNotifier());
     }
 
     @Bean

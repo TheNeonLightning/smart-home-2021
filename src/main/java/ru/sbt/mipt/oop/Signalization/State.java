@@ -1,6 +1,5 @@
 package ru.sbt.mipt.oop.Signalization;
 
-
 public interface State {
 
     void activate(int code);

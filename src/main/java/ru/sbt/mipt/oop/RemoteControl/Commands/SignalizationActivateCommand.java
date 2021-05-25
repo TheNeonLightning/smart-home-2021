@@ -7,7 +7,7 @@ public class SignalizationActivateCommand implements Command {
 
     private final Signalization signalization;
     private final int code = 1234;
-        // TODO not sure what to do with the code for signalization
+    // TODO code storing guidelines were not specified, using simple solution
 
     public SignalizationActivateCommand(Signalization signalization) {
         this.signalization = signalization;

@@ -1,6 +1,5 @@
 package ru.sbt.mipt.oop.HomeSupervision;
 
-
 import ru.sbt.mipt.oop.SensorEvent;
 
 // interface HomeSupervision is used to separate sensor events
