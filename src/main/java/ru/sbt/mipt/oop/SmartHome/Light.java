@@ -1,8 +1,13 @@
 package ru.sbt.mipt.oop.SmartHome;
 
-public class Light {
+public class Light implements Actionable {
     private boolean isOn;
     private final String id;
+
+    @Override
+    public void execute(Action action) {
+        action.applyAction(this);
+    }
 
     public Light(String id, boolean isOn) {
         this.id = id;

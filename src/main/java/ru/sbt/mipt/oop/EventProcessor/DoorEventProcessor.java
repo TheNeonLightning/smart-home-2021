@@ -1,9 +1,7 @@
 package ru.sbt.mipt.oop.EventProcessor;
 
 import ru.sbt.mipt.oop.*;
-import ru.sbt.mipt.oop.SmartHome.Door;
-import ru.sbt.mipt.oop.SmartHome.Room;
-import ru.sbt.mipt.oop.SmartHome.SmartHome;
+import ru.sbt.mipt.oop.SmartHome.*;
 
 
 public class DoorEventProcessor implements EventProcessor {
@@ -23,25 +21,26 @@ public class DoorEventProcessor implements EventProcessor {
     }
 
     private void handleDoorOpen(String doorId) {
-        Door door = findDoor(doorId);
-        door.setOpen(true);
-        System.out.println("Door " + door.getId() + " was opened.");
+        smartHome.execute((object) -> {
+            if (object instanceof Door) {
+                Door door = (Door) object;
+                if (door.getId().equals(doorId)) {
+                    door.setOpen(true);
+                    System.out.println("Door " + door.getId() + " was opened.");
+                }
+            }
+        });
     }
 
     private void handleDoorClosed(String doorId)  {
-        Door door = findDoor(doorId);
-        door.setOpen(false);
-        System.out.println("Door " + door.getId() + " was closed.");
-    }
-
-    private Door findDoor(String doorId) {
-        for (Room room : smartHome.getRooms()) {
-            for (Door door : room.getDoors()) {
+        smartHome.execute((object) -> {
+            if (object instanceof Door) {
+                Door door = (Door) object;
                 if (door.getId().equals(doorId)) {
-                    return door;
+                    door.setOpen(false);
+                    System.out.println("Door " + door.getId() + " was closed.");
                 }
             }
-        }
-        throw new RuntimeException("Door ID not found");
+        });
     }
 }

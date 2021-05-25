@@ -1,9 +1,7 @@
 package ru.sbt.mipt.oop.EventProcessor;
 
 import ru.sbt.mipt.oop.*;
-import ru.sbt.mipt.oop.SmartHome.Light;
-import ru.sbt.mipt.oop.SmartHome.Room;
-import ru.sbt.mipt.oop.SmartHome.SmartHome;
+import ru.sbt.mipt.oop.SmartHome.*;
 
 
 public class LightEventProcessor implements EventProcessor {
@@ -23,25 +21,28 @@ public class LightEventProcessor implements EventProcessor {
     }
 
     private void handleLightOn(String lightId) {
-        Light light = findLight(lightId);
-        light.setOn(true);
-        System.out.println("Light " + light.getId() + " was turned on.");
+        smartHome.execute((object) -> {
+            if (object instanceof Light) {
+                Light light = (Light) object;
+                if (light.getId().equals(lightId)) {
+                    light.setOn(true);
+                    System.out.println("Light " +
+                            light.getId() + " was turned on.");
+                }
+            }
+        });
     }
 
     private void handleLightOff(String lightId) {
-        Light light = findLight(lightId);
-        light.setOn(false);
-        System.out.println("Light " + light.getId() + " was turned off.");
-    }
-
-    private Light findLight(String lightId) {
-        for (Room room : smartHome.getRooms()) {
-            for (Light light : room.getLights()) {
+        smartHome.execute((object) -> {
+            if (object instanceof Light) {
+                Light light = (Light) object;
                 if (light.getId().equals(lightId)) {
-                    return light;
+                    light.setOn(false);
+                    System.out.println("Light " +
+                            light.getId() + " was turned off.");
                 }
             }
-        }
-        throw new RuntimeException("Light ID not found");
+        });
     }
 }

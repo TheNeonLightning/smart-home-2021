@@ -2,10 +2,21 @@ package ru.sbt.mipt.oop.SmartHome;
 
 import java.util.Collection;
 
-public class Room {
+public class Room implements Actionable {
     private Collection<Light> lights;
     private Collection<Door> doors;
     private String name;
+
+    @Override
+    public void execute(Action action) {
+        for (Light light : lights) {
+            light.execute(action);
+        }
+        for (Door door : doors) {
+            door.execute(action);
+        }
+        action.applyAction(this);
+    }
 
     public Room(Collection<Light> lights, Collection<Door> doors, String name) {
         this.lights = lights;
