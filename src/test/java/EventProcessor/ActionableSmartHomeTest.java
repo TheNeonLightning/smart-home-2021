@@ -7,7 +7,6 @@ import ru.sbt.mipt.oop.SmartHome.Door;
 import ru.sbt.mipt.oop.SmartHome.Light;
 import ru.sbt.mipt.oop.SmartHome.Room;
 import ru.sbt.mipt.oop.SmartHome.SmartHome;
-import ru.sbt.mipt.oop.SmartHomeUtility;
 
 
 public class ActionableSmartHomeTest {
@@ -15,13 +14,8 @@ public class ActionableSmartHomeTest {
     HomeProvider homeProvider;
     SmartHome smartHome;
 
-    public void setHome() {
-        homeProvider = new JsonHomeProvider("smart-home-1.js");
-        smartHome = homeProvider.provideHome();
-    }
-
     @Test
-    public void ActionableLightsTest() {
+    public void actionableLightsTest() {
         setHome();
 
         smartHome.execute((object) -> {
@@ -41,11 +35,12 @@ public class ActionableSmartHomeTest {
                 }
             }
         });
-        Assert.assertFalse(SmartHomeUtility.findLight(smartHome, lightId).isOn());
+
+        LightChecker.checkLight(smartHome, lightId, false);
     }
 
     @Test
-    public void ActionableDoorsTest() {
+    public void actionableDoorsTest() {
         setHome();
 
         smartHome.execute((object) -> {
@@ -65,11 +60,12 @@ public class ActionableSmartHomeTest {
                 }
             }
         });
-        Assert.assertFalse(SmartHomeUtility.findDoor(smartHome, hallDoorId).isOpen());
+
+        DoorChecker.checkDoor(smartHome, hallDoorId, false);
     }
 
     @Test
-    public void ActionableRoomsTest() {
+    public void actionableRoomsTest() {
         setHome();
 
         smartHome.execute(object -> {
@@ -87,11 +83,12 @@ public class ActionableSmartHomeTest {
         });
 
         String hallDoorId = "4";
-        Assert.assertFalse(SmartHomeUtility.findDoor(smartHome, hallDoorId).isOpen());
+
+        DoorChecker.checkDoor(smartHome, hallDoorId, false);
     }
 
     @Test
-    public void ActionableSmartHomeTest() {
+    public void actionableSmartHomeTest() {
         setHome();
         int homeObjectsNumber = 18;
 
@@ -109,17 +106,22 @@ public class ActionableSmartHomeTest {
         Assert.assertEquals(homeObjectsNumber, action.counter);
     }
 
+    private void setHome() {
+        homeProvider = new JsonHomeProvider("smart-home-1.js");
+        smartHome = homeProvider.provideHome();
+    }
+
     private void checkAllDoorsOpen() {
         for (int id = 1; id < 5; ++id) {
             String doorId = Integer.valueOf(id).toString();
-            Assert.assertTrue(SmartHomeUtility.findDoor(smartHome, doorId).isOpen());
+            DoorChecker.checkDoor(smartHome, doorId, true);
         }
     }
 
     private void checkAllLightsOn() {
         for (int id = 1; id < 9; ++id) {
             String lightId = Integer.valueOf(id).toString();
-            Assert.assertTrue(SmartHomeUtility.findLight(smartHome, lightId).isOn());
+            LightChecker.checkLight(smartHome, lightId, true);
         }
     }
 }
