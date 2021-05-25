@@ -13,6 +13,7 @@ import ru.sbt.mipt.oop.HomeRunner.HomeRunner;
 import ru.sbt.mipt.oop.HomeRunner.SmartHomeRunner;
 import ru.sbt.mipt.oop.HomeSupervision.HomeSupervision;
 import ru.sbt.mipt.oop.HomeSupervision.HomeSupervisionSimulator;
+import ru.sbt.mipt.oop.SmartHome.SmartHome;
 
 
 import java.util.Arrays;
