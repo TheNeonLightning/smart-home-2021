@@ -2,6 +2,7 @@ package ru.sbt.mipt.oop.SmartHome;
 
 import java.util.Collection;
 
+
 public class Room implements Actionable {
     private Collection<Light> lights;
     private Collection<Door> doors;
