@@ -19,7 +19,7 @@ public class HallDoorCloseCommandTest {
 
     @Before
     public void setHome() {
-        homeProvider = new JsonHomeProvider("smart-home-1.js");
+        homeProvider = new JsonHomeProvider("smart-home-1.json");
         smartHome = homeProvider.provideHome();
         homeControl = new TestHomeControl();
     }

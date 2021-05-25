@@ -23,7 +23,7 @@ public class HallDoorEventProcessorTest {
     HomeControl homeControl;
 
     public void setHome() {
-        homeProvider = new JsonHomeProvider("smart-home-1.js");
+        homeProvider = new JsonHomeProvider("smart-home-1.json");
         smartHome = homeProvider.provideHome();
         homeControl = new HomeControlSimulator();
         eventResolver = new SmartHomeEventResolver(
