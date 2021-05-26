@@ -15,3 +15,11 @@ Educational project for the practice of software design. Implements a "brain" of
 - Controls signalization
 - Runs owner notification duty
 - Supports remote control 
+
+## Specific design solutions
+- Implemented traversing of the structure of the house using patterns __Iterator__ and __Composite__
+- Implemented signalization using pattern __State__
+- Added signalization related event processing logic to existing event processors via __Decorator__
+- Connected an external API to the project using the __Adapter__ pattern 
+- Worked with dependency injection framework Spring
+- Applied external library for remote control to the project usign __Command__ pattern
