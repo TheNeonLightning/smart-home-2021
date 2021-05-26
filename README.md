@@ -18,7 +18,6 @@ Educational project for the practice of software design. Implements a "brain" of
 
 
 ## Specific design solutions
-Following standard OOP princepl
 - Implemented traversing of the structure of the house using patterns __Iterator__ and __Composite__
 - Implemented signalization using pattern __State__
 - Added signalization related event processing logic to existing event processors via __Decorator__
